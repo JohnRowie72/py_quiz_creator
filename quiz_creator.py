@@ -4,13 +4,13 @@ import os
 # define a function that formats the questions, options, and correct answer
 # and into a structured block to be saved in a text file
 def format_question_block(question, options, correct_answer):
-    block + "[QUESTION]\n"
+    block = "[QUESTION]\n"
     block += f"Question: {question}\n"
     block += "[OPTIONS]\n"
-    block += f"A: {options[A]}\n"
-    block += f"B: {options[B]}\n"
-    block += f"C: {options[C]}\n"
-    block += f"D: {options[D]}\n"
+    block += f"A: {options['A']}\n"
+    block += f"B: {options['B']}\n"
+    block += f"C: {options['C']}\n"
+    block += f"D: {options['D']}\n"
     block += "[CORRECT_ANSWER]\n"
     block += f"Correct Answer: {correct_answer}\n"
     block += "[END]\n"
