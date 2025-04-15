@@ -51,7 +51,15 @@ def main():
         options = {}
         for choice in ['A', 'B', 'C', 'D']:
             options[choice] = input(f"🔸 Enter option {choice}: ").strip()
-            
+
         # ask the user for the correct answer
+        correct_answer = get_valid_answer("✅ Which option is correct? (A/B/C/D): ", ['A', 'B', 'C', 'D'])
+
         # format the question block and save it to the file
+        block = format_question_block(question, options, correct_answer)
+        save_question_to_file(filename, block)
+        print("✅ Question saved!\n")
+
 # run the main function if the script is executed directly
+if __name__ == "__main__":
+    main()
