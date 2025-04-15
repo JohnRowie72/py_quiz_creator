@@ -140,37 +140,15 @@ class QuizCreatorApp(tk.Tk):
             self.question_display.insert(tk.END, "No questions found.")
     
     def edit_question(self):
-        # Get the selected question text
-        selected_text = self.question_display.get("1.0", tk.END).strip()
-        if not selected_text:
-            messagebox.showwarning("No Selection", "Please select a question to edit.")
+        original_text = self.question_display.get("1.0", tk.END).strip()
+        if not original_text:
+            messagebox.showwarning("No Content", "Nothing to edit.")
             return
 
-        # Extract question number (e.g., [QUESTION 1])
-        question_number = selected_text.split('\n')[0].strip()
-        question_num = question_number.split(' ')[1]
-
-        # Create a new window to edit the question
-        edit_window = tk.Toplevel(self)
-        edit_window.title(f"Edit Question {question_num}")
-        edit_window.geometry("500x400")
-
-        # Add labels and fields for editing
-        tk.Label(edit_window, text="Edit Question:", font=self.font_title).pack(pady=10)
-        question_entry = tk.Entry(edit_window, font=self.font_main, width=50)
-        question_entry.insert(tk.END, selected_text.split('\n')[1].split(':')[1].strip())
-        question_entry.pack(pady=5)
-
-        options = {}
-        for choice in ['A', 'B', 'C', 'D']:
-            options[choice] = tk.Entry(edit_window, font=self.font_main, width=50)
-            options[choice].insert(tk.END, selected_text.split(f"{choice}:")[1].split('\n')[0].strip())
-            tk.Label(edit_window, text=f"Option {choice}:", font=self.font_main).pack(pady=5)
-            options[choice].pack(pady=5)
-
-        correct_answer = ttk.Combobox(edit_window, values=['A', 'B', 'C', 'D'], font=self.font_main, state="readonly")
-        correct_answer.set(selected_text.split("Correct Answer:")[1].split('\n')[0].strip())
-        correct_answer.pack(pady=5)
+        with open("quiz_storage.txt", "w", encoding="utf-8") as file:
+            file.write(original_text)
+        messagebox.showinfo("Saved", "Changes saved to quiz_storage.txt!")
+        self.load_questions()
 
     def delete_question(self):
         if messagebox.askyesno("Confirm Deletion", "Are you sure you want to delete ALL questions?"):
