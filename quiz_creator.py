@@ -48,6 +48,10 @@ def main():
             break
 
         # ask the user for options A, B, C, and D
+        options = {}
+        for choice in ['A', 'B', 'C', 'D']:
+            options[choice] = input(f"🔸 Enter option {choice}: ").strip()
+            
         # ask the user for the correct answer
         # format the question block and save it to the file
 # run the main function if the script is executed directly
