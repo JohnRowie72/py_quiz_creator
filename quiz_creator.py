@@ -56,6 +56,29 @@ class QuizCreatorApp:
         self.view_edit_ui()
 
         self.question_count = self.get_question_count()
+
+    def create_question_ui(self):
+        # labels and inputs for creating questions
+        tk.Label(self.create_tab, text="Enter Quiz Question:", font=self.font_title, bg="#FFEB3B").pack(pady=10)
+        self.question_entry = tk.Entry(self.create_tab, font=self.font_main, width=50)
+        self.question_entry.pack(pady=5)
+
+        tk.Label(self.create_tab, text="Enter Options:", font=self.font_title, bg="#FFEB3B").pack(pady=10)
+        self.options = {}
+        for choice in ['A', 'B', 'C', 'D']:
+            label = f"Option {choice}:"
+            self.options[choice] = tk.Entry(self.create_tab, font=self.font_main, width=50)
+            tk.Label(self.create_tab, text=label, font=self.font_main, bg="#FFEB3B").pack(pady=5)
+            self.options[choice].pack(pady=5)
+        
+        tk.label(self.create_tab, text="Select Correct Answer:", font=self.font_title, bg="#FFEB3B").pack(pady=10)
+        self.correct_answer = ttk.Combobox(self.create_tab, values=['A', 'B', 'C', 'D'], font=self.font_main, state="readonly")
+        self.correct_answer.pack(pady=5)
+
+        # save question button
+        self.save_button = tk.Button(self.create_tab, text="Save Question", font=self.font_main, bg=self.bg_color, command=self.save_question)
+        self.save_button.pack(pady=10)
+        
 # run the main function if the script is executed directly
 if __name__ == "__main__":
     main()
