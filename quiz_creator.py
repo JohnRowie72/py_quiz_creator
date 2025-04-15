@@ -21,44 +21,8 @@ def save_question_to_file(filename, data):
     with open(filename, "a", encoding="utf-8") as file:
         file.write(data)
 
-# define a function to validate the correct answer input
-# keeps asking until a valid input is provided
-def get_valid_answer(prompt_message, valid_choices):
-    while True:
-
-        # ask the user for input and convert the input to uppercase and remove leading/trailing spaces
-        answer = input(prompt_message).strip().upper()
-        if answer in valid_choices:
-            return answer
-        else:
-            print(f"Invalid input. Please choose from {', '.join(valid_choices)}.")
-
-# define the main logic to create a quiz
-# loop to repeatedly ask for quiz questions and store them in a file
-def main():
-    filename = "quiz_bank.txt"
-    print("📚 Welcome to the Quiz Creator!")
-    print("Create as many questions as you want. Type 'exit' to stop.\n")
-
-    while True:
-        # ask the user for a quiz question
-        question = input("❓ Enter your quiz question (or type 'exit' to finish): ").strip()
-        if question.lower() == 'exit':
-            print("👋 Exiting Quiz Creator. All data saved.")
-            break
-
-        # ask the user for options A, B, C, and D
-        options = {}
-        for choice in ['A', 'B', 'C', 'D']:
-            options[choice] = input(f"🔸 Enter option {choice}: ").strip()
-
-        # ask the user for the correct answer
-        correct_answer = get_valid_answer("✅ Which option is correct? (A/B/C/D): ", ['A', 'B', 'C', 'D'])
-
-        # format the question block and save it to the file
-        block = format_question_block(question, options, correct_answer)
-        save_question_to_file(filename, block)
-        print("✅ Question saved!\n")
+class QuizCreatorApp:
+    def __init__(self):
 
 # run the main function if the script is executed directly
 if __name__ == "__main__":
