@@ -25,10 +25,9 @@ def save_question_to_file(filename, data):
         file.write(data)
 
 # create the main window (GUI)
-class QuizCreatorApp:
+class QuizCreatorApp():
     def __init__(self):
         super().__init__()
-
         self.title("Quiz Creator")
         self.geometry("700x700")
         self.config(bg="#FFEB3B")
@@ -173,6 +172,31 @@ class QuizCreatorApp:
         correct_answer.set(selected_text.split("Correct Answer:")[1].split('\n')[0].strip())
         correct_answer.pack(pady=5)
 
+    def delete_question(self):
+        selected_text = self.question_display.get("1.0", tk.END).strip()
+        if not selected_text:
+            messagebox.showwarning("No Selection", "Please select a question to delete.")
+            return
+
+        # Confirm before deleting
+        if messagebox.askyesno("Confirm Deletion", "Are you sure you want to delete this question?"):
+            with open("quiz_storage.txt", "r", encoding="utf-8") as file:
+                lines = file.readlines()
+
+            with open("quiz_storage.txt", "w", encoding="utf-8") as file:
+                in_delete_block = False
+                for line in lines:
+                    if line.startswith("[QUESTION"):
+                        if in_delete_block:
+                            in_delete_block = False
+                        continue
+                    file.write(line)
+
+            messagebox.showinfo("Success", "Question deleted successfully!")
+            self.load_questions()
+
 # run the main function if the script is executed directly
 if __name__ == "__main__":
-    main()
+    app = QuizCreatorApp()
+    app.mainloop()
+
