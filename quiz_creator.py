@@ -117,26 +117,22 @@ class QuizCreatorApp(tk.Tk):
             return sum(1 for line in file if line.startswith("[QUESTION]"))
     
     def view_edit_ui(self):
-        # text area to display questions from the file
-        self.question_display = ScrolledText(self.view_tab, width=70, height=15, font=self.font_main)
+        self.question_display = ScrolledText(self.view_tab, width=70, height=25, font=self.font_main)
         self.question_display.pack(pady=10)
         self.load_questions()
 
-        # edit and delete buttons
-        self.edit_button = tk.Button(self.view_tab, text="Edit Selected Question", font=self.font_main, bg=self.bg_color, command=self.edit_question)
+        self.edit_button = tk.Button(self.view_tab, text="Edit Question (Paste it first)", font=self.font_main, bg=self.bg_color, command=self.edit_question)
         self.edit_button.pack(pady=10)
 
-        self.delete_button = tk.Button(self.view_tab, text="Delete Selected Question", font=self.font_main, bg=self.bg_color2, command=self.delete_question)
+        self.delete_button = tk.Button(self.view_tab, text="Delete All Questions", font=self.font_main, bg=self.bg_color2, command=self.delete_question)
         self.delete_button.pack(pady=10)
         
     def load_questions(self):
-        # load the questions from the file and display them
-        try:
+        self.question_display.delete(1.0, tk.END)
+        if os.path.exists("quiz_storage.txt"):
             with open("quiz_storage.txt", "r", encoding="utf-8") as file:
-                content = file.read()
-                self.question_text.delete(1.0, tk.END)
-                self.question_text.insert(tk.END, content)
-        except FileNotFoundError:
+                self.question_display.insert(tk.END, file.read())
+        else:
             self.question_display.insert(tk.END, "No questions found.")
     
     def edit_question(self):
