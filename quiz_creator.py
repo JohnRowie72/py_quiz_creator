@@ -109,12 +109,12 @@ class QuizCreatorApp(tk.Tk):
         for entry in self.options.values():
             entry.delete(0, tk.END)
         self.correct_answer.set('')
-    
+
     def get_question_count(self):
         if not os.path.exists("quiz_storage.txt"):
             return 0
         with open("quiz_storage.txt", "r", encoding="utf-8") as file:
-            return sum(1 for line in file if line.startswith("[QUESTION]"))
+            return sum(1 for line in file if line.startswith("[QUESTION"))
     
     def view_edit_ui(self):
         self.question_display = ScrolledText(self.view_tab, width=70, height=25, font=self.font_main)
