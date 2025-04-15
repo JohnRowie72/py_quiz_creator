@@ -15,8 +15,12 @@ def format_question_block(question, options, correct_answer):
     block += f"Correct Answer: {correct_answer}\n"
     block += "[END]\n"
     return block
-    
+
 # define a function to append the formatted question block to a text file
+def save_question_to_file(filename, data):
+    with open(filename, "a", encoding="utf-8") as file:
+        file.write(data)
+        
 # define a function to validate the correct answer input
 # keeps asking until a valid input is provided
 # define the main logic to create a quiz
