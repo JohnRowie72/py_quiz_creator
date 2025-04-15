@@ -117,6 +117,16 @@ class QuizCreatorApp:
         with open("quiz_storage.txt", "r", encoding="utf-8") as file:
             return sum(1 for line in file if line.startswith("[QUESTION]"))
     
+    def load_questions(self):
+        # load the questions from the file and display them
+        try:
+            with open("quiz_storage.txt", "r", encoding="utf-8") as file:
+                content = file.read()
+                self.question_text.delete(1.0, tk.END)
+                self.question_text.insert(tk.END, content)
+        except FileNotFoundError:
+            self.question_display.insert(tk.END, "No questions found.")
+    
 # run the main function if the script is executed directly
 if __name__ == "__main__":
     main()
