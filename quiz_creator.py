@@ -70,7 +70,7 @@ class QuizCreatorApp(tk.Tk):
             tk.Label(self.create_tab, text=label, font=self.font_main, bg="#FFEB3B").pack(pady=5)
             self.options[choice].pack(pady=5)
         
-        tk.label(self.create_tab, text="Select Correct Answer:", font=self.font_title, bg="#FFEB3B").pack(pady=10)
+        tk.Label(self.create_tab, text="Select Correct Answer:", font=self.font_title, bg="#FFEB3B").pack(pady=10)
         self.correct_answer = ttk.Combobox(self.create_tab, values=['A', 'B', 'C', 'D'], font=self.font_main, state="readonly")
         self.correct_answer.pack(pady=5)
 
@@ -173,26 +173,9 @@ class QuizCreatorApp(tk.Tk):
         correct_answer.pack(pady=5)
 
     def delete_question(self):
-        selected_text = self.question_display.get("1.0", tk.END).strip()
-        if not selected_text:
-            messagebox.showwarning("No Selection", "Please select a question to delete.")
-            return
-
-        # Confirm before deleting
-        if messagebox.askyesno("Confirm Deletion", "Are you sure you want to delete this question?"):
-            with open("quiz_storage.txt", "r", encoding="utf-8") as file:
-                lines = file.readlines()
-
-            with open("quiz_storage.txt", "w", encoding="utf-8") as file:
-                in_delete_block = False
-                for line in lines:
-                    if line.startswith("[QUESTION"):
-                        if in_delete_block:
-                            in_delete_block = False
-                        continue
-                    file.write(line)
-
-            messagebox.showinfo("Success", "Question deleted successfully!")
+        if messagebox.askyesno("Confirm Deletion", "Are you sure you want to delete ALL questions?"):
+            open("quiz_storage.txt", "w").close()
+            messagebox.showinfo("Deleted", "All questions have been deleted.")
             self.load_questions()
 
 # run the main function if the script is executed directly
