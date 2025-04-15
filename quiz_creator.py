@@ -105,7 +105,18 @@ class QuizCreatorApp:
         self.clear_inputs()
         self.load_questions()
 
-        
+    def clear_inputs(self):
+        self.question_entry.delete(0, tk.END)
+        for entry in self.options.values():
+            entry.delete(0, tk.END)
+        self.correct_answer.set('')
+    
+    def get_question_count(self):
+        if not os.path.exists("quiz_storage.txt"):
+            return 0
+        with open("quiz_storage.txt", "r", encoding="utf-8") as file:
+            return sum(1 for line in file if line.startswith("[QUESTION]"))
+    
 # run the main function if the script is executed directly
 if __name__ == "__main__":
     main()
