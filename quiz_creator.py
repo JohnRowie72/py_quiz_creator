@@ -21,8 +21,21 @@ def save_question_to_file(filename, data):
     with open(filename, "a", encoding="utf-8") as file:
         file.write(data)
 
+# create the main window (GUI)
 class QuizCreatorApp:
     def __init__(self):
+        super().__init__()
+
+        self.title("Quiz Creator")
+        self.geometry("700x700")
+        self.config(bg="#FFEB3B")
+
+        # fonts and colors
+        self.font_main = ("Arial", 12)
+        self.font_title = ("Arial", 16, "bold")
+        self.bg_color = "#FF5722"
+        self.bg_color2 = "#FF9800"
+
 
 # run the main function if the script is executed directly
 if __name__ == "__main__":
