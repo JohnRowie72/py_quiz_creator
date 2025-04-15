@@ -36,7 +36,23 @@ class QuizCreatorApp:
         self.bg_color = "#FF5722"
         self.bg_color2 = "#FF9800"
 
+        # add tabs using a notebook widget
+        self.notebook = ttk.Notebook(self)
+        self.notebook.pack(fill="both", expand=True)
 
+        # create the tabs for "Create" and "View/Edit"
+        self.create_tab = tk.Frame(self.notebook, bg="#FF9800")
+        self.view_tab = tk.Frame(self.notebook, bg="#FF9800")
+        self.notebook.add(self.create_tab, text="Create Question")
+        self.notebook.add(self.view_tab, text="View/Edit Questions")
+        
+        # create question tab UI
+        self.create_question_ui()
+
+        # view/edit questions tab UI
+        self.view_edit_ui()
+
+        self.question_count = self.get_question_count()
 # run the main function if the script is executed directly
 if __name__ == "__main__":
     main()
