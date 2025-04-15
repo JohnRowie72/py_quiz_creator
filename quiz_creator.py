@@ -1,4 +1,7 @@
 # import necessary libraries for file handling
+import tkinter as tk
+from tkinter import ttk, messagebox
+from tkinter.scrolledtext import ScrolledText
 import os
 
 # define a function that formats the questions, options, and correct answer
