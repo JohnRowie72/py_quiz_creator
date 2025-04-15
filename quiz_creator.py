@@ -100,7 +100,12 @@ class QuizCreatorApp:
         self.question_count += 1
         block = format_question_block(question, options, correct_answer, self.question_count)
         save_question_to_file(filename, block)
-    
+
+        messagebox.showinfo("Success", "Question saved successfully!")
+        self.clear_inputs()
+        self.load_questions()
+
+        
 # run the main function if the script is executed directly
 if __name__ == "__main__":
     main()
