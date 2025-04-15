@@ -78,7 +78,7 @@ class QuizCreatorApp(tk.Tk):
         self.save_button = tk.Button(self.create_tab, text="Save Question", font=self.font_main, bg=self.bg_color, command=self.save_question)
         self.save_button.pack(pady=10)
     
-    def save_questions(self):
+    def save_question(self):
         question = self.question_entry.get().strip()
         if not question:
             messagebox.showwarning("Error", "Please enter a question.")
@@ -94,7 +94,6 @@ class QuizCreatorApp(tk.Tk):
             messagebox.showwarning("Error", "Please select a correct answer.")
             return
 
-        # format the question block and save it to a file
         filename = "quiz_storage.txt"
         self.question_count += 1
         block = format_question_block(question, options, correct_answer, self.question_count)
