@@ -25,7 +25,7 @@ def save_question_to_file(filename, data):
         file.write(data)
 
 # create the main window (GUI)
-class QuizCreatorApp():
+class QuizCreatorApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Quiz Creator")
