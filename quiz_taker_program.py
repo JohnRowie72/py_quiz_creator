@@ -104,8 +104,21 @@ class QuizApp(tk.Tk):
 
         else:
             self.show_results()
-                    
+
     # handle the user's answer
+    def submit_answer(self):
+        selected = self.selected_answer.get()
+        # if no option selected, show warning
+        if not selected:
+            messagebox.showwarning("Warning", "Please select an option.")
+            return
+
+        # record selected answer
+        self.user_answers.append(selected)
+        # move to next question
+        self.current_index += 1
+        self.load_question()
+        
     # display quiz results
     # function to restart the quiz
 # run the program
