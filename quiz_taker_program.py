@@ -91,8 +91,20 @@ class QuizApp(tk.Tk):
         #create a submit button
         self.submit_button = tk.Button(self, text="Submit Answer", command=self.submit_answer, font=("Helvetica", 14), bg="#00ADB5", fg="white")
         self.submit_button.pack(pady=20)
-        
+
     # load the quiz question into the UI
+    def load_question(self):
+        if self.current_index < len(self.questions):
+            current_question = self.questions[self.current_index]
+            self.question_label.config(text=current_question["question"])
+            self.selected_answer.set("")
+
+            for key, btn in self.option_buttons.items():
+                btn.config(text=current_question["options"][key], state=tk.NORMAL)
+
+        else:
+            self.show_results()
+                    
     # handle the user's answer
     # display quiz results
     # function to restart the quiz
