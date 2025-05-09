@@ -4,7 +4,7 @@ from tkinter import messagebox
 import random
 
 # define a function to load quiz questions from a text file
-def load_quesitons_data(filename="quiz_storage.txt"):
+def load_questions_data(filename="quiz_storage.txt"):
     with open(filename, "r", encoding="utf-8") as file:
         content = file.read().strip()
 
@@ -34,6 +34,23 @@ def load_quesitons_data(filename="quiz_storage.txt"):
     return questions
     
 # define a class for the quiz application
+class QuizApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        
+        #set up the main window
+        self.title("🔥 Quiz Taker 🔥")
+        self.geometry("800x600")
+        self.configure(bg="#222831")
+
+        # load quiz questions and intialize counters
+        self.questions = load_questions_data()
+        self.current_question_index = 0
+        self.user_answers = []
+
+        self.create_widgets()
+        self.load_question()
+
 # define a function to create the GUI components
     # create the UI components
     # load the quiz question into the UI
