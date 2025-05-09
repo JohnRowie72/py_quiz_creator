@@ -1,4 +1,8 @@
 # import necessary libraries for GUI and file handling
+import tkinter as tk
+from tkinter import messagebox
+import random
+
 # define a function to load quiz questions from a text file
 # define a class for the quiz application
 # define a function to create the GUI components
