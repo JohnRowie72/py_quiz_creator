@@ -161,6 +161,16 @@ class QuizApp(tk.Tk):
         # add button to restart the quiz
         restart_button = tk.Button(self, text="Try Again", command=self.restart_quiz, font=("Helvetica", 14), bg="#00ADB5", fg="white")
         restart_button.pack(pady=20)
-        
+
     # function to restart the quiz
+    def restart_quiz(self):
+        self.questions = load_quiz_data()
+        self.current_question_index = 0
+        self.user_answers = []
+
+        for widget in self.winfo_children():
+            widget.destroy()
+        self.create_widgets()
+        self.load_question()
+
 # run the program
