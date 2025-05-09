@@ -9,10 +9,10 @@ import os
 def format_question_block(question, options, correct_answer):
     block = f"Question: {question}\n"
     block += "[OPTIONS]\n"
-    block += f"A: {options['A']}\n"
-    block += f"B: {options['B']}\n"
-    block += f"C: {options['C']}\n"
-    block += f"D: {options['D']}\n"
+    block += f"option a: {options['option_a']}\n"
+    block += f"option b: {options['option_b']}\n"
+    block += f"option c: {options['option_c']}\n"
+    block += f"option d: {options['option_d']}\n"
     block += f"Correct Answer: {correct_answer}\n"
     return block
 
@@ -61,14 +61,14 @@ class QuizCreatorApp(tk.Tk):
 
         tk.Label(self.create_tab, text="Enter Options:", font=self.font_title, bg="#FFEB3B").pack(pady=10)
         self.options = {}
-        for choice in ['A', 'B', 'C', 'D']:
-            label = f"Option {choice}:"
+        for choice in ['option_a', 'option_b', 'option_c', 'option_d']:
+            label = choice
             self.options[choice] = tk.Entry(self.create_tab, font=self.font_main, width=50)
             tk.Label(self.create_tab, text=label, font=self.font_main, bg="#FFEB3B").pack(pady=5)
             self.options[choice].pack(pady=5)
         
         tk.Label(self.create_tab, text="Select Correct Answer:", font=self.font_title, bg="#FFEB3B").pack(pady=10)
-        self.correct_answer = ttk.Combobox(self.create_tab, values=['A', 'B', 'C', 'D'], font=self.font_main, state="readonly")
+        self.correct_answer = ttk.Combobox(self.create_tab, values=['option_a', 'option_b', 'option_c', 'option_d'], font=self.font_main, state="readonly")
         self.correct_answer.pack(pady=5)
 
         # save question button
