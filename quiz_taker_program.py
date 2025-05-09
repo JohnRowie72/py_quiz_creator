@@ -118,7 +118,49 @@ class QuizApp(tk.Tk):
         # move to next question
         self.current_index += 1
         self.load_question()
-        
+
     # display quiz results
+    def show_results(self):
+        #clear the window of previous widgets
+        for widget in self.winfo_children():
+            widget.destroy()
+
+        score = 0
+        result_text = ""
+
+        for i, question in enumerate(self.questions):
+            correct = question["correct"]
+            user_choice = self.user_answers[i]
+
+            if user_choice == correct:
+                # increment score if correct
+                score += 1
+            else:
+                # record incorrect answer details
+                question_text = question["question"]
+                user_answer = question["options"][user_choice]
+                correct_answer = question["options"][correct]
+                result_text += f"\n🟥 {question_text}\n  ❌ Your Answer: {user_answer}\n  ✅ Correct Answer: {correct_answer}\n"
+
+        # display score summary
+        score_summary = f"🏁 Your Score: {score}/{len(self.questions)}\n"
+        score_label = tk.Label(self, text=score_summary, font=("Helvetica", 20, "bold"), fg="#FFD369", bg="#222831")
+        score_label.pack(pady=20)
+
+        if result_text:
+            # show detailed feedback if there were mistakes
+            result_box = tk.Text(self, wrap="word", font=("Helvetica", 14), bg="#393E46", fg="white", width=80, height=20)
+            result_box.insert(tk.END, result_text.strip())
+            result_box.config(state="disabled")
+            result_box.pack(pady=10)
+        else:
+            # display perfect score message
+            perfect_label = tk.Label(self, text="🎉 Perfect Score! Galing mo boss!", font=("Helvetica", 16), fg="white", bg="#222831")
+            perfect_label.pack(pady=10)
+
+        # add button to restart the quiz
+        restart_button = tk.Button(self, text="Try Again", command=self.restart_quiz, font=("Helvetica", 14), bg="#00ADB5", fg="white")
+        restart_button.pack(pady=20)
+        
     # function to restart the quiz
 # run the program
