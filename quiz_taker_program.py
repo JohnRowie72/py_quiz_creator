@@ -4,7 +4,7 @@ from tkinter import messagebox
 import random
 
 # define a function to load quiz questions from a text file
-def load_questions_data(filename="quiz_storage.txt"):
+def load_quiz_data(filename="quiz_storage.txt"):
     with open(filename, "r", encoding="utf-8") as file:
         content = file.read().strip()
 
@@ -16,17 +16,17 @@ def load_questions_data(filename="quiz_storage.txt"):
         lines = block.strip().splitlines()
         question_text = lines[0].strip()
         options = {
-            "option_a": lines[2].strip("option_a: ")[1].strip(),
-            "option_b": lines[3].strip("option_b: ")[1].strip(),
-            "option_c": lines[4].strip("option_c: ")[1].strip(),
-            "option_d": lines[5].strip("option_d: ")[1].strip(),
+            "option_a": lines[2].split("option_a: ")[1].strip(),
+            "option_b": lines[3].split("option_b: ")[1].strip(),
+            "option_c": lines[4].split("option_c: ")[1].strip(),
+            "option_d": lines[5].split("option_d: ")[1].strip(),
         }
-        correct_answer = lines[6].strip("correct_answer: ")[1].strip()
+        correct_answer = lines[6].split("Correct Answer: ")[1].strip()
         # store the parsed question data into the list
         questions.append({
             "question": question_text,
             "options": options,
-            "correct_answer": correct_answer
+            "correct": correct_answer
         })
 
     #shuffle the list of questions randomly
@@ -44,8 +44,8 @@ class QuizApp(tk.Tk):
         self.configure(bg="#222831")
 
         # load quiz questions and intialize counters
-        self.questions = load_questions_data()
-        self.current_question_index = 0
+        self.questions = load_quiz_data()
+        self.current_index = 0
         self.user_answers = []
 
         self.create_widgets()
@@ -149,7 +149,7 @@ class QuizApp(tk.Tk):
 
         if result_text:
             # show detailed feedback if there were mistakes
-            result_box = tk.Text(self, wrap="word", font=("Helvetica", 14), bg="#393E46", fg="white", width=80, height=20)
+            result_box = tk.Text(self, wrap="word", font=("Helvetica", 14), bg="#393E46", fg="white", width=60, height=15)
             result_box.insert(tk.END, result_text.strip())
             result_box.config(state="disabled")
             result_box.pack(pady=10)
@@ -160,12 +160,12 @@ class QuizApp(tk.Tk):
 
         # add button to restart the quiz
         restart_button = tk.Button(self, text="Try Again", command=self.restart_quiz, font=("Helvetica", 14), bg="#00ADB5", fg="white")
-        restart_button.pack(pady=20)
+        restart_button.pack(pady=1)
 
     # function to restart the quiz
     def restart_quiz(self):
         self.questions = load_quiz_data()
-        self.current_question_index = 0
+        self.current_index = 0
         self.user_answers = []
 
         for widget in self.winfo_children():
