@@ -174,3 +174,6 @@ class QuizApp(tk.Tk):
         self.load_question()
 
 # run the program
+if __name__ == "__main__":
+    app = QuizApp()
+    app.mainloop()
