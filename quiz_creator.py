@@ -9,10 +9,10 @@ import os
 def format_question_block(question, options, correct_answer):
     block = f"Question: {question}\n"
     block += "[OPTIONS]\n"
-    block += f"option a: {options['option_a']}\n"
-    block += f"option b: {options['option_b']}\n"
-    block += f"option c: {options['option_c']}\n"
-    block += f"option d: {options['option_d']}\n"
+    block += f"option_a: {options['option_a']}\n"
+    block += f"option_b: {options['option_b']}\n"
+    block += f"option_c: {options['option_c']}\n"
+    block += f"option_d: {options['option_d']}\n"
     block += f"Correct Answer: {correct_answer}\n"
     return block
 
