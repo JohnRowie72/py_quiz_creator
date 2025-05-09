@@ -51,8 +51,47 @@ class QuizApp(tk.Tk):
         self.create_widgets()
         self.load_question()
 
-# define a function to create the GUI components
     # create the UI components
+    def create_widgets(self):
+        self.title_label = tk.Label(self, text="QUIZ TIME", font=("Helvetica", 24, "bold"), fg="#FFD369", bg="#222831")
+        self.title_label.pack(pady=20)
+
+        self.question_label = tk.Label(self, text="", font=("Helvetica", 16), fg="white", bg="#222831", wraplength=700, justify="center")
+        self.question_label.pack(pady=20)
+
+        self.options_frame = tk.Frame(self, bg="#222831")
+        self.options_frame.pack(pady=10)
+
+        self.selected_answer = tk.StringVar(value="")
+
+        self.option_buttons = {}
+        for key in ['option_a', 'option_b', 'option_c', 'option_d']:
+
+            # create radio buttons for each option
+            btn = tk.Radiobutton(
+                self.options_frame,
+                text="",
+                variable=self.selected_answer,
+                value=key,
+                font=("Helvetica", 13),
+                bg="#393E46",
+                fg="white",
+                wraplength=650,
+                justify="left",
+                indicatoron=0,
+                width=60,
+                height=3,
+                pady=10,
+                selectcolor="#FFD369",
+                activebackground="#00ADB5"
+            )
+            btn.pack(pady=1, anchor="w")
+            self.option_buttons[key] = btn
+
+        #create a submit button
+        self.submit_button = tk.Button(self, text="Submit Answer", command=self.submit_answer, font=("Helvetica", 14), bg="#00ADB5", fg="white")
+        self.submit_button.pack(pady=20)
+        
     # load the quiz question into the UI
     # handle the user's answer
     # display quiz results
